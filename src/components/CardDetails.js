@@ -9,20 +9,22 @@ class CardDetails extends Component {
   }
 
   render() {
-    console.log('got here')
+    console.log(this.props.cardList)
     return (
       <div className="card-details-container">
         <div className="card-details-left">
-          <div onClick={this.backToList}>
+          <div onClick={this.backToList} className="back-img-container">
             <img src={require('../images/back.svg')} className="back-img" />
           </div>
           <Card info={this.props.cardInfo} class={`${this.props.cardInfo.type}-card`} isInDetails='true' />
         </div>
         <div className="card-details-right">
           {this.props.cardList.map((card, index) => {
-            return <div key={index} className="card-details-white-opt">
-              <div>{card.text}</div>
-            </div>
+            if (card.type === 'white') {
+              return <div key={index} className="card-details-white-opt">
+                <div>{card.text}</div>
+              </div>
+            }
           })
           }
         </div>

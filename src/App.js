@@ -1,14 +1,13 @@
 import React, { Component } from 'react';
-import { Provider } from 'react-redux';
-import store from './store';
 import Navbar from './components/Navbar'
 import Intro from './components/Intro'
 import CardList from './components/CardList'
 import './styles/style.css';
 import { CardsProvider } from "./providers/CardsProvider";
+import { BrowserRouter as Route, Switch } from "react-router-dom";
+import Surprise from './components/Surprise'
 
 export default class App extends Component {
-
   state = {
     cards: [
       {
@@ -20,30 +19,25 @@ export default class App extends Component {
         type: 'white',
       },
       {
-        text: 'Justin Bieber2',
-        type: 'white',
-      },
-      {
-        text: 'Justin Bieber3',
-        type: 'white',
-      },
-      {
-        text: 'This shouldnt show',
+        text: 'Drinking alone.',
         type: 'white',
       },
       {
         text: 'During my time at Ironhack, I have felt like ______.',
         type: 'black',
       },
+      {
+        text: 'What gets better with age?',
+        type: 'black',
+      },
     ]
   }
 
   addNewCard = (e, newCardValue) => {
-      this.state.cards.push({
-        text: newCardValue,
-        type: e.target.attributes.type.value,
-      })
-      console.log(this.state.cards)
+    this.state.cards.push({
+      text: newCardValue,
+      type: e.target.attributes.type.value,
+    })
   }
 
   editExistingCard = (index, cardText) => {
@@ -52,12 +46,18 @@ export default class App extends Component {
   }
 
   render() {
-    console.log(this.state.cards)
     return (
       <CardsProvider value={this.state.cards}>
-          <Navbar />
-          <Intro/>
-          <CardList onSubmit={this.addNewCard} onEdit={this.editExistingCard}/>
+        <Navbar />
+        <Intro />
+        <Switch>
+          <Route exact path="/">
+            <CardList onSubmit={this.addNewCard} onEdit={this.editExistingCard} />
+          </Route>
+          <Route exact path="/surprise">
+            <Surprise />
+          </Route>
+        </Switch>
       </CardsProvider>
     );
   }

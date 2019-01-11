@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom'
 
 class Navbar extends Component {
   render() {
@@ -10,7 +11,8 @@ class Navbar extends Component {
             <div>Cards against humanity</div>
           </div>
           <div className="nav-links">
-            <div>Surprise me</div>
+            <Link to="/" className="nav-link">Card List</Link>
+            <Link to="/surprise" className="nav-link">New!</Link>
           </div>
         </nav>
       </div>

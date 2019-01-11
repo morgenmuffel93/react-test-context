@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import Card from './Card'
 import CardDetails from './CardDetails'
 import { CardsConsumer } from "../providers/CardsProvider";
+import { withRouter } from 'react-router'
+
 
 class CardList extends Component {
   state = {
@@ -68,18 +70,6 @@ class CardList extends Component {
     }
   }
 
-  showAddCardForm = () => {
-    this.setState({
-      addingNewCard: true,
-    })
-  }
-
-  handleNewCardText = (e) => {
-    this.setState({
-      newCardText: e.target.value
-    })
-  }
-
   checkIfAdding = () => {
     if (this.state.addingNewCard && this.state.isInBlack) {
       return <div className="guide-card-container">
@@ -87,6 +77,7 @@ class CardList extends Component {
           <textarea name="text" cols="20" rows="13" className="add-black-text" onChange={this.handleNewCardText} />
           <button type="black" className="add-card-btn" onClick={this.addNewCard}>Add</button>
           <button className="add-card-btn" onClick={this.discardNewCard}>Discard</button>
+          <div>{this.state.error}</div>
         </form>
       </div>
     } else if (this.state.addingNewCard && this.state.isInWhite) {
@@ -105,35 +96,59 @@ class CardList extends Component {
     }
   }
 
+  showAddCardForm = () => {
+    this.setState({
+      addingNewCard: true,
+      error: '',
+    })
+  }
+
+  handleNewCardText = (e) => {
+    this.setState({
+      newCardText: e.target.value
+    })
+  }
+
   addNewCard = (e) => {
     e.preventDefault()
-    if (this.state.newCardText.indexOf('_') >= 0) {
+    console.log(this.state.newCardText)
+    if (this.state.newCardText) {
+      if (this.state.newCardText.indexOf('_') >= 0) {
 
-      if (e.target.attributes.type.value === 'white') {
-        this.setState({
-          error: 'White cards cannot have blanks.'
-        })
+        if (e.target.attributes.type.value === 'white') {
+          this.setState({
+            error: 'White cards cannot have blanks.'
+          })
 
+        } else {
+          let replaced = this.state.newCardText.replace(/_+/, '______')
+
+          this.props.onSubmit(e, replaced)
+
+          this.setState({
+            addingNewCard: false,
+            error: '',
+            newCardText: '',
+          })
+        }
       } else {
-        let replaced = this.state.newCardText.replace(/_+/, '______')
+        let cardText = this.state.newCardText;
 
-        this.props.onSubmit(e, replaced)
+        this.props.onSubmit(e, cardText)
 
         this.setState({
           addingNewCard: false,
           error: '',
+          newCardText: '',
         })
       }
     } else {
-      let cardText = this.state.newCardText;
-
-      this.props.onSubmit(e, cardText)
-
       this.setState({
-        addingNewCard: false,
-        error: '',
+        error: 'You are supposed to write something there'
       })
     }
+
+
   }
 
   discardNewCard = (e) => {
@@ -170,8 +185,7 @@ class CardList extends Component {
       return (
         <CardsConsumer>
           {cardsList => {
-            let selected = cardsList.slice(0, 4);
-            return <CardDetails cardInfo={cardsList[this.state.detailedCardIndex]} cardList={selected} handleBackButton={this.showCardList} />
+            return <CardDetails cardInfo={cardsList[this.state.detailedCardIndex]} cardList={cardsList} handleBackButton={this.showCardList} />
           }}
         </CardsConsumer>
       )
@@ -196,4 +210,4 @@ class CardList extends Component {
   }
 }
 
-export default CardList;
+export default withRouter(CardList)
