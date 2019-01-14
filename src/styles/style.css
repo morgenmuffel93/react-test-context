@@ -66,10 +66,16 @@ nav .nav-links {
   font-size: 20px;
 }
 nav .nav-links .nav-link {
+  border: 1px solid #fbfbfb;
+  padding: 8px 14px;
+  border-radius: 10px;
+  box-shadow: 0px 0px 9px 1px #d6d6d6;
+}
+nav .nav-links .nav-link:hover {
   border: 1px solid #161616;
   padding: 8px 14px;
   border-radius: 10px;
-  box-shadow: 0px 0px 10px 1px #949494;
+  box-shadow: 0px 0px 10px 1px #d6d6d6;
 }
 
 /* -- Intro -- */
@@ -77,7 +83,7 @@ nav .nav-links .nav-link {
   display: flex;
   justify-content: space-around;
   align-items: center;
-  margin-top: 100px;
+  margin-top: 80px;
 }
 .intro-section .intro-left {
   display: flex;
@@ -122,18 +128,28 @@ nav .nav-links .nav-link {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
+  margin-bottom: 30px;
 }
 .card-cuadricle .add-img-container {
   height: 390px;
   display: flex;
   align-items: center;
+  justify-content: center;
   margin: 20px 20px 0px 20px;
+  width: 270px;
 }
 .card-cuadricle .add-img-container .add-card-img {
   width: 50px;
 }
 .card-cuadricle .add-img-container .add-card-img:hover {
   cursor: pointer;
+}
+
+.error-msg {
+  font-size: 15px;
+  color: #dd4444;
+  text-align: center;
+  margin-top: 6px;
 }
 
 /* -- Create and Edit Card -- */
@@ -278,9 +294,22 @@ nav .nav-links .nav-link {
 .bouquet-container {
   text-align: center;
   padding-top: 40px;
+  margin-bottom: 30px;
+  color: #7cb38b;
+  font-size: 25px;
 }
 .bouquet-container img {
   width: 500px;
+}
+
+/* -- Footer -- */
+footer {
+  font-size: 12px;
+  height: 50px;
+  border-top: 1px solid #7cb38b;
+  color: #7cb38b;
+  text-align: right;
+  padding-right: 10px;
 }
 
 /*# sourceMappingURL=style.css.map */

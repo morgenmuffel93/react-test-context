@@ -5,17 +5,18 @@ import CardList from './components/CardList'
 import './styles/style.css';
 import { CardsProvider } from "./providers/CardsProvider";
 import { BrowserRouter as Route, Switch } from "react-router-dom";
-import Surprise from './components/Surprise'
+import New from './components/New'
+import Footer from './components/Footer'
 
 export default class App extends Component {
   state = {
     cards: [
       {
-        text: 'Dying',
+        text: 'Dying.',
         type: 'white',
       },
       {
-        text: 'Justin Bieber',
+        text: 'Justin Bieber.',
         type: 'white',
       },
       {
@@ -54,10 +55,11 @@ export default class App extends Component {
           <Route exact path="/">
             <CardList onSubmit={this.addNewCard} onEdit={this.editExistingCard} />
           </Route>
-          <Route exact path="/surprise">
-            <Surprise />
+          <Route exact path="/new">
+            <New />
           </Route>
         </Switch>
+        <Footer/>
       </CardsProvider>
     );
   }

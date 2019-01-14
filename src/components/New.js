@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import {withRouter} from 'react-router'
 
-class Surprise extends Component {
+class New extends Component {
   render() {
     return (
       <div className="bouquet-container">
@@ -11,4 +11,4 @@ class Surprise extends Component {
     );
   }
 }
-export default withRouter(Surprise)
+export default withRouter(New)

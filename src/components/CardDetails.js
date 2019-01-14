@@ -9,7 +9,6 @@ class CardDetails extends Component {
   }
 
   render() {
-    console.log(this.props.cardList)
     return (
       <div className="card-details-container">
         <div className="card-details-left">

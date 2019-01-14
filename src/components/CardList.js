@@ -77,7 +77,7 @@ class CardList extends Component {
           <textarea name="text" cols="20" rows="13" className="add-black-text" onChange={this.handleNewCardText} />
           <button type="black" className="add-card-btn" onClick={this.addNewCard}>Add</button>
           <button className="add-card-btn" onClick={this.discardNewCard}>Discard</button>
-          <div>{this.state.error}</div>
+          <div className="error-msg">{this.state.error}</div>
         </form>
       </div>
     } else if (this.state.addingNewCard && this.state.isInWhite) {
@@ -86,7 +86,7 @@ class CardList extends Component {
           <textarea name="text" cols="20" rows="13" className="add-white-text" onChange={this.handleNewCardText} />
           <button type="white" className="add-card-btn" onClick={this.addNewCard}>Add</button>
           <button className="add-card-btn" onClick={this.discardNewCard}>Discard</button>
-          <div>{this.state.error}</div>
+          <div className="error-msg">{this.state.error}</div>
         </form>
       </div>
     } else {
@@ -111,7 +111,6 @@ class CardList extends Component {
 
   addNewCard = (e) => {
     e.preventDefault()
-    console.log(this.state.newCardText)
     if (this.state.newCardText) {
       if (this.state.newCardText.indexOf('_') >= 0) {
 
